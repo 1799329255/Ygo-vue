@@ -1,32 +1,64 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style lang="less">
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
-#nav {
-  padding: 30px;
-}
+  ul,
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  a {
+    text-decoration: none;
+  }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .article_category {
+
+    /*去掉el-tab-pane底部灰色线条*/
+    .el-tabs__nav-wrap::after {
+      height: 0;
+    }
+
+    /*去掉el-tab-pane切换时的蓝色下划线*/
+    .el-tabs__active-bar {
+      background: none;
+    }
+
+    .el-tabs__item {
+      padding: 0 10px;
+    }
+
+
+  }
+
+  .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .el-upload:hover {
+    border-color: #409EFF;
+  }
+
+  .cover .el-upload {
+    width: 100%;
+  }
+
+  .write {
+    .el-form-item__content {
+      flex: 1;
+    }
+  }
 </style>
