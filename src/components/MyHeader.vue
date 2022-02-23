@@ -165,19 +165,23 @@
         }
       },
       search() {
-        if (this.searchSelect == '1') {
-          if (this.searchStr) {
-            this.$router.push({
-              name: 'Search',
-              query: {
-                search: this.searchStr
-              }
-            })
-          } else {
-            this.$router.push({
-              name: 'Search'
-            })
-          }
+        if (this.searchSelect=='1') {
+          this.$router.push({
+            name: 'Search',
+            query: {
+              search: JSON.stringify({title:this.searchStr}),
+              tabName: this.searchSelect
+            }
+          })
+        }
+        if (this.searchSelect=='2') {
+          this.$router.push({
+            name: 'Search',
+            query: {
+              search: JSON.stringify({name:this.searchStr}),
+              tabName: this.searchSelect
+            }
+          })
         }
       }
 
