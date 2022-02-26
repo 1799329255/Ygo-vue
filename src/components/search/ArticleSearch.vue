@@ -42,7 +42,7 @@
                             </el-link>
                         </router-link>
 
-                        <div>{{item.content}}</div>
+                        <!-- <div>{{item.content}}</div> -->
 
                         <div class="describe-content">
                             <div>
@@ -52,8 +52,14 @@
                                 </router-link>
                             </div>
                             <ul>
-                                <li><i class="el-icon-star-on"></i>{{item.likeNum}}</li>
-                                <li><i class="el-icon-star-on"></i>{{item.viewNum}}</li>
+                                <li>
+                                    <el-image class="myImg" src="http://127.0.0.1:9000/system/like/like.png">
+                                    </el-image>{{item.likeNum}}
+                                </li>
+                                <li>
+                                    <el-image class="myImg" src="http://127.0.0.1:9000/system/view/view.png">
+                                    </el-image>{{item.viewNum}}
+                                </li>
                             </ul>
                         </div>
 
@@ -63,7 +69,7 @@
                                 </el-image>
                                 <span>{{item.user.name}}</span>
                             </el-link>
-                            <span>4小时前</span>
+                            <span>{{item.updateTime | fomatTime}}</span>
                         </div>
 
                     </div>
@@ -110,7 +116,7 @@
                     category: null,
                     labels: [],
                 }
-                
+
             }
         },
         props: {

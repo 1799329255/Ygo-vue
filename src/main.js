@@ -14,15 +14,16 @@ import {
   getCookie
 } from './utils/cookie'
 import {
-  initMenu
-} from '@/utils/menu'
+  fomatTime
+} from '@/utils/time'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.prototype.getRequest = getRequest;
-Vue.prototype.postRequest = postRequest;
-Vue.prototype.putRequest = putRequest;
-Vue.prototype.deleteRequest = deleteRequest;
+Vue.prototype.getRequest = getRequest
+Vue.prototype.postRequest = postRequest
+Vue.prototype.putRequest = putRequest
+Vue.prototype.deleteRequest = deleteRequest
+Vue.filter('fomatTime',fomatTime)
 
 Vue.config.productionTip = false
 

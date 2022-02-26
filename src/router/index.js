@@ -17,6 +17,9 @@ import Article from '../components/Article.vue'
 import Write from '../components/Write.vue'
 import User from '../components/User.vue'
 import Search from '../components/Search.vue'
+import CardSearch from '../components/CardSearch.vue'
+import Cards from '../components/Cards.vue'
+import Card from '../components/Card.vue'
 
 Vue.use(VueRouter)
 
@@ -95,6 +98,21 @@ const routes = [
         path: '/search',
         name: 'Search',
         component: Search
+      },
+      {
+        path: '/cardSearch',
+        name: 'CardSearch',
+        component: CardSearch
+      },
+      {
+        path: '/cards',
+        name: 'Cards',
+        component: Cards
+      },
+      {
+        path: '/card',
+        name: 'Card',
+        component: Card
       }
     ]
   },

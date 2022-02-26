@@ -25,7 +25,9 @@
                                     <el-button @click="getCategoryIdNewArticles(4)" round size="mini">禁卡表</el-button>
                                 </el-col>
                                 <el-col :span="2.4">
-                                    <el-button @click="getCategoryIdNewArticles()" round size="mini">更多</el-button>
+                                    <router-link :to="{name:'Search'}">
+                                        <el-button round size="mini">更多</el-button>
+                                    </router-link>
                                 </el-col>
                             </el-row>
                         </div>
@@ -42,13 +44,20 @@
                                     </router-link>
                                 </div>
                                 <div class="describe">
-                                    <div><a href="">{{item.categoryName}}</a></div>
-                                    
-                                        <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                                            <el-link><h3>{{item.title}}</h3></el-link>
+                                    <div>
+                                        <router-link
+                                            :to="{name: 'Search',query:{search: JSON.stringify({categoryId:item.categoryId}), tabName: '1'}}">
+                                            {{item.categoryName}}
                                         </router-link>
-                                    
-                                    <div>{{item.content}}</div>
+                                    </div>
+
+                                    <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
+                                        <el-link>
+                                            <h3>{{item.title}}</h3>
+                                        </el-link>
+                                    </router-link>
+
+                                    <!-- <div>{{item.content}}</div> -->
                                     <div style="height:24px;">
                                         <div class="describe-userInfo">
                                             <el-link :underline="false" @click="toUser(item.user.id)">
@@ -59,10 +68,17 @@
                                         </div>
                                         <div class="describe-content">
                                             <ul>
-                                                <li>4小时前</li>
-                                                <li><i class="el-icon-star-on"></i>{{item.likeNum}}</li>
-                                                <li><i class="el-icon-star-on"></i>0</li>
-                                                <li><i class="el-icon-star-on"></i>{{item.viewNum}}</li>
+                                                <li>{{item.updateTime | fomatTime}}</li>
+                                                <li>
+                                                    <el-image class="myImg"
+                                                        src="http://127.0.0.1:9000/system/like/like.png">
+                                                    </el-image>{{item.likeNum}}
+                                                </li>
+                                                <li>
+                                                    <el-image class="myImg"
+                                                        src="http://127.0.0.1:9000/system/view/view.png">
+                                                    </el-image>{{item.viewNum}}
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -92,7 +108,7 @@
                                         <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
                                             <el-link>{{item.title}}</el-link>
                                         </router-link>
-                                        <div>2月3日</div>
+                                        <div>{{item.updateTime | fomatTime}}</div>
                                     </div>
                                 </li>
                             </ul>
@@ -116,13 +132,15 @@
                                             <el-image style="width:25px;" :src="item.user.pic" fit="contain"></el-image>
                                             <span>{{item.user.name}}</span>
                                         </el-link>
-                                        <div class="time">21分钟前</div>
+                                        <div class="time">{{item.updateTime | fomatTime}}</div>
                                     </div>
 
-                                    <div>{{item.content}}</div>
+                                    <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                                        {{item.content}}</div>
                                     <div>
                                         <span>[文章]来自：</span>
-                                        <router-link :to="{name: 'Article',query:{article:JSON.stringify(item.article)}}">
+                                        <router-link
+                                            :to="{name: 'Article',query:{article:JSON.stringify(item.article)}}">
                                             <el-link>{{item.article.title}}</el-link>
                                         </router-link>
                                     </div>
@@ -206,7 +224,6 @@
                             let list = this.newArticles.list.concat(res.data.list)
                             this.newArticles = res.data
                             this.newArticles.list = list
-
                         }
                     })
                 }

@@ -61,4 +61,15 @@
       flex: 1;
     }
   }
+
+  .article {
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .myImg {
+    width: 20px;
+    overflow: visible !important;
+  }
 </style>

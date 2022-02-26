@@ -98,7 +98,7 @@
           <el-menu-item index="2-3">选项3</el-menu-item>
         </el-submenu>
         <el-menu-item index="3">规则</el-menu-item>
-        <el-menu-item index="4">快速查询</el-menu-item>
+        <el-menu-item index="/cardSearch">快速查询</el-menu-item>
         <el-menu-item index="5">游戏下载</el-menu-item>
         <el-menu-item index="6">论坛</el-menu-item>
         <el-menu-item index="7">商店</el-menu-item>

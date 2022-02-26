@@ -119,6 +119,9 @@
 
 <style scoped lang="less">
     .article {
+        img{
+            max-width:100%;
+        }
         .title {
             font-size: 1.5em;
             font-weight: bold;

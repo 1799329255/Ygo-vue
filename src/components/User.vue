@@ -63,11 +63,11 @@
         return this.otherUser ? this.otherUser : this.user
       }
     },
-    beforeDestroy() {
-      if (this.otherUser) {
-        this.$store.commit('setOtherUser', null)
-      }
-    },
+    // beforeDestroy() {
+    //   if (this.otherUser) {
+    //     this.$store.commit('setOtherUser', null)
+    //   }
+    // },
   }
 </script>
 

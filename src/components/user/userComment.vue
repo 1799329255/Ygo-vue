@@ -11,13 +11,15 @@
                             <span>{{item.user.name}}</span>
                         </div>
 
-                        <div class="time">21分钟前</div>
+                        <div class="time">{{item.updateTime | fomatTime}}</div>
                     </div>
 
                     <div>{{item.content}}</div>
                     <div>
                         <span>[文章]来自：</span>
-                        <a href="">{{item.article.title}}</a>
+                        <router-link :to="{name: 'Article',query:{article:JSON.stringify(item.article)}}">
+                            <el-link>{{item.article.title}}</el-link>
+                        </router-link>
                     </div>
                 </li>
 
