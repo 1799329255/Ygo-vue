@@ -4,11 +4,11 @@
             <li v-for="(item,index) in articles.list" :key="index">
                 <div class="img">
                     <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}" v-if="otherUser">
-                        <el-image style="width:190px;" :src="item.pic" fit="contain"></el-image>
+                        <el-image style="width:190px; height:140px;" :src="item.pic" fit="cover"></el-image>
                     </router-link>
 
                     <router-link :to="{name: 'Write',query:{article:JSON.stringify(item)}}" v-else>
-                        <el-image style="width:190px;" :src="item.pic" fit="contain"></el-image>
+                        <el-image style="width:190px; height:140px;" :src="item.pic" fit="cover"></el-image>
                     </router-link>
                 </div>
                 <div class="describe">
@@ -34,8 +34,11 @@
                     <div style="height:24px;">
                         <div class="describe-userInfo">
                             <div>
-                                <el-image style="width:25px;" :src="item.user.pic" fit="contain"></el-image>
-                                <span>{{item.user.name}}</span>
+                                <div style="display: flex;justify-content:space-between;align-items: center;">
+                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                    </el-image>
+                                    <span>{{item.user.name}}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="describe-content">

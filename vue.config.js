@@ -16,7 +16,9 @@ module.exports = {
     devServer: {
         host: 'localhost',
         port: 8080,
-        proxy: proxyObj
+        proxy: proxyObj,
+        disableHostCheck: true
     },
     lintOnSave: false, // 关闭 eslint 检查 
+     
 }

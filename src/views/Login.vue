@@ -49,8 +49,8 @@
               trigger: "blur"
             },
             {
-              min: 3,
-              max: 5,
+              min: 2,
+              max: 20,
               message: "长度在 2 到 20 个字符",
               trigger: "blur"
             },
@@ -62,8 +62,8 @@
             },
             {
               min: 3,
-              max: 5,
-              message: "长度在 2 到 20 个字符",
+              max: 20,
+              message: "长度在 3 到 20 个字符",
               trigger: "blur"
             },
           ],
@@ -99,7 +99,7 @@
             });
           } else {
             this.loading = false;
-            this.$message.error("error submit!!");
+            this.$message.error("格式不正确，请重新输入");
             return false;
           }
         });

@@ -3,8 +3,9 @@
         <ul>
             <li>
                 <div>昵称</div>
-                <div v-show="shows[0]">{{user.name}}<el-link type="primary" icon="el-icon-edit"
-                        @click="handleShows(0,false)">编辑</el-link>
+                <div v-show="shows[0]">{{user.name}}
+                    <!-- <el-link type="primary" icon="el-icon-edit"
+                        @click="handleShows(0,false)">编辑</el-link> -->
                 </div>
                 <div v-show="!shows[0]">
                     <el-form :model="forms[0]" :rules="rules" ref="form0">

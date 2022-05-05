@@ -20,7 +20,7 @@ axios.interceptors.response.use(success => {
     console.log("111",success)
     let data = success.data
     if (data.code == 200){
-        Message.success({ message: data.msg })
+        //Message.success({ message: data.msg })
         return data;
     } else {
         Message.error({ message: data.msg })

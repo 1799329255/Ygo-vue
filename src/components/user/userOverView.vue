@@ -2,7 +2,11 @@
     <div class="userOverView">
         <el-descriptions class="margin-top" title="用户信息" :column="3" border>
             <template slot="extra">
-                <el-button type="primary" size="small">操作</el-button>
+                <div v-if="otherUser">
+                    <el-button v-if="isFollowed" type="primary" size="small" @click="unFollow">取消关注</el-button>
+                    <el-button v-else type="primary" size="small" @click="follow">关注</el-button>
+                </div>
+
             </template>
             <el-descriptions-item>
                 <template slot="label">
@@ -13,7 +17,7 @@
             </el-descriptions-item>
             <el-descriptions-item>
                 <template slot="label">
-                    <i class="el-icon-mobile-phone"></i>
+                    <i class="el-icon-male"></i>
                     性别
                 </template>
                 {{middleUser.sex===0? '女': '男'}}
@@ -27,24 +31,24 @@
             </el-descriptions-item>
             <el-descriptions-item>
                 <template slot="label">
-                    <i class="el-icon-mobile-phone"></i>
+                    <i class="el-icon-s-promotion"></i>
                     邮箱
                 </template>
                 {{middleUser.email}}
             </el-descriptions-item>
             <el-descriptions-item>
                 <template slot="label">
-                    <i class="el-icon-location-outline"></i>
+                    <i class="el-icon-user-solid"></i>
                     年龄
                 </template>
                 {{middleUser.age}}
             </el-descriptions-item>
             <el-descriptions-item>
                 <template slot="label">
-                    <i class="el-icon-office-building"></i>
+                    <i class="el-icon-date"></i>
                     入住日期
                 </template>
-                {{middleUser.create_time}}
+                {{middleUser.createTime | fomatTime}}
             </el-descriptions-item>
             <el-descriptions-item>
                 <template slot="label">
@@ -79,16 +83,88 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import {
+        mapState,
+        mapActions
+    } from 'vuex'
     export default {
         name: 'UserOverView',
         computed: {
-            ...mapState(['user','otherUser']),
-            middleUser(){
+            ...mapState(['user', 'otherUser']),
+            middleUser() {
                 return this.otherUser ? this.otherUser : this.user
             }
         },
-    
+        data() {
+            return {
+                isFollowed: false
+            }
+        },
+        methods: {
+            ...mapActions(['updateUser', 'updateOtherUser']),
+            init() {
+                if (this.otherUser) {
+                    this.isFollow()
+                }
+            },
+            follow() {
+                let formData = new FormData()
+                formData.append('fanId', this.otherUser.id)
+                formData.append('followId', this.user.id)
+                this.postRequest("/user/follow", formData).then((res) => {
+                    if (res) {
+                        this.updateUser().then(res => {
+                            if (res) {
+                                this.updateOtherUser(this.otherUser.id).then(res => {
+                                    if (res) {
+                                        this.$message.success('已关注')
+                                        this.isFollowed = true
+                                    }
+
+                                })
+                            }
+
+                        })
+                    }
+                })
+            },
+            unFollow() {
+                let formData = new FormData()
+                formData.append('fanId', this.otherUser.id)
+                formData.append('followId', this.user.id)
+                this.postRequest("/user/unFollow", formData).then((res) => {
+                    if (res) {
+                        this.updateUser().then(res => {
+                            if (res) {
+                                this.updateOtherUser(this.otherUser.id).then(res => {
+                                    if (res) {
+                                        this.$message.success('已取消关注')
+                                        this.isFollowed = false
+                                    }
+
+                                })
+                            }
+
+                        })
+                    }
+                })
+
+            },
+            isFollow() {
+                this.getRequest("/user/isFollow", {
+                    fanId: this.user.id,
+                    followId: this.otherUser.id
+                }).then((res) => {
+                    if (res) {
+                        this.isFollowed = res.data
+                    }
+                })
+            }
+        },
+        created() {
+            this.init()
+        },
+
     }
 </script>
 

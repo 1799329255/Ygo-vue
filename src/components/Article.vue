@@ -12,13 +12,15 @@
                     <div class="userInfo">
                         <div class="top">
                             <h3>关于作者</h3>
-                            <el-link type="primary">关注</el-link>
+                            <!-- <el-link type="primary">关注</el-link> -->
                         </div>
                         <div class="main">
                             <el-link :underline="false" @click="toUser(user.id)">
-                                <el-image style="width:50px;" :src="user.pic" fit="contain">
-                                </el-image>
-                                <span>{{user.name}}</span>
+                                <div style="display: flex;justify-content:space-between;align-items: center;">
+                                    <el-image style="width:50px; margin-right:5px;" :src="user.pic" fit="cover">
+                                    </el-image>
+                                    <span>{{user.name}}</span>
+                                </div>
                             </el-link>
                         </div>
                         <div>
@@ -43,9 +45,9 @@
                         </div>
                         <div class="bottom">
                             <ul v-for="(item,index) in user.articles" :key="index">
-                                <li>
+                                <li style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                     <span>[文章]</span>
-                                    <el-link @click="toArticle(item)">{{item.title}}</el-link>
+                                    <a href="javascript:;" @click="toArticle(item)">{{item.title}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -119,9 +121,10 @@
 
 <style scoped lang="less">
     .article {
-        img{
-            max-width:100%;
+        img {
+            max-width: 100%;
         }
+
         .title {
             font-size: 1.5em;
             font-weight: bold;

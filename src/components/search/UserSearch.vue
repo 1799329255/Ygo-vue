@@ -38,7 +38,10 @@
                     </el-link>
                 </li>
             </ul>
-            <el-button @click="getNextUsers(5)">点击加载</el-button>
+            <div style="width:1150px;margin:0 auto;">
+                <el-button @click="getNextUsers(8)">点击加载</el-button>
+            </div>
+            
         </div>
         <el-empty description="暂无数据" v-else></el-empty>
     </div>
@@ -86,13 +89,13 @@
         watch: {
             search(newValue, oldValue) {
                 this.setUserForm()
-                this.getUsers(1, 5)
+                this.getUsers(1, 8)
             }
         },
         methods: {
             init() {
                 this.setUserForm()
-                this.getUsers(1, 5)
+                this.getUsers(1, 8)
             },
             setUserForm() {
                 this.userForm.name = this.user.name
@@ -138,6 +141,8 @@
                             this.users.list = list
                         }
                     })
+                } else {
+                    this.$message.warning('没有数据了')
                 }
 
             },
@@ -145,7 +150,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.getUsers(1, 5)
+                        this.getUsers(1, 8)
                     }
                 })
             },
@@ -185,6 +190,9 @@
                 >li {
                     margin: 0 20px;
                 }
+            }
+            .box{
+                text-align:center;
             }
 
             .describe {

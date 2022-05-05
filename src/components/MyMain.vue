@@ -1,9 +1,11 @@
 <template>
     <div class="myMain">
         <div v-if="isload" class="block">
-            <el-carousel trigger="click" height="150px">
+            <el-carousel trigger="click" height="300px">
                 <el-carousel-item v-for="(item,index) in articles.list" :key="index">
-                    <el-image style="width:100%" :src="item.pic" fit="contain"></el-image>
+                    <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
+                        <el-image style="width:100%" :src="item.pic" fit="cover"></el-image>
+                    </router-link>
                 </el-carousel-item>
             </el-carousel>
         </div>
@@ -28,7 +30,7 @@
         methods: {
             init() {
                 this.getRequest("/article/findArticleInfoPage", {
-                    order: 'update_time',
+                    order: 'id',
                     pageNum: 1,
                     pageSize: 4
                 }).then((res) => {

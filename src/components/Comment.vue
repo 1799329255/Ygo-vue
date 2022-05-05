@@ -1,7 +1,7 @@
 <template>
     <div v-if="isload" class="comment">
         <h3 class="title">{{comments.list?comments.list.length:0}}条评论</h3>
-        <div class="content">
+        <div class="content" v-if="user">
             <div class="textarea">
                 <el-input type="textarea" :autosize="{ minRows: 4}" placeholder="请输入内容" v-model="textarea">
                 </el-input>
@@ -11,20 +11,24 @@
             <ul>
                 <li class="top" v-for="(item,index) in comments.list" :key="index">
                     <div class="userInfo">
-                        <a href="">
-                            <img class="b2-radius"
-                                src="https://ygodl.com/wp-content/uploads/thumb/2022/02/fill_w192_h192_g0_mark_449226209d44e3c602_1_avatar.jpg"
-                                style="width:25px;">
-                            <span>{{item.user.name}}</span>
-                        </a>
-
-                        <div class="time">21分钟前</div>
+                        <el-link :underline="false" @click="toUser(item.user.id)">
+                            <div style="display: flex;justify-content:space-between;align-items: center;">
+                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                </el-image>
+                                <span>{{item.user.name}}</span>
+                            </div>
+                        </el-link>
+                        <div style="display: flex;justify-content:space-between;align-items: center;">
+                            <div class="time" style="margin-right:10px;">{{item.updateTime | fomatTime}}</div>
+                            <div>
+                                <i class="el-icon-star-on"></i>{{item.likeNum}}
+                            </div>
+                        </div>
+                        
                     </div>
 
                     <div>{{item.content}}</div>
-                    <div>
-                        <i class="el-icon-star-on"></i>{{item.likeNum}}
-                    </div>
+                    
                 </li>
 
             </ul>
@@ -60,7 +64,7 @@
             },
         },
         methods: {
-            ...mapActions(['updateUser']),
+            ...mapActions(['updateUser','updateOtherUser']),
             init() {
                 this.getRequest("/comment/findCommentInfoPage", {
                     order: 'update_time',
@@ -134,6 +138,15 @@
                     }
                 })
             },
+            toUser(id) {
+                this.updateOtherUser(id).then(res => {
+                    if (res) {
+                        this.$router.push({
+                            name: 'User'
+                        })
+                    }
+                })
+            },
         },
         created() {
             this.init();
@@ -144,6 +157,7 @@
 <style scoped lang="less">
     .content {
         .top {
+            margin-top: 20px;
             >div {
                 margin-top: 10px;
             }

@@ -40,30 +40,37 @@
                             <li v-for="(item,index) in newArticles.list" :key="index">
                                 <div class="img">
                                     <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                                        <el-image style="width:190px;" :src="item.pic" fit="contain"></el-image>
+                                        <el-image style="width:190px; height:140px;" :src="item.pic" fit="cover">
+                                        </el-image>
                                     </router-link>
                                 </div>
                                 <div class="describe">
                                     <div>
-                                        <router-link
-                                            :to="{name: 'Search',query:{search: JSON.stringify({categoryId:item.categoryId}), tabName: '1'}}">
-                                            {{item.categoryName}}
+                                        <div style="margin-bottom:10px;">
+                                            <router-link
+                                                :to="{name: 'Search',query:{search: JSON.stringify({categoryId:item.categoryId}), tabName: '1'}}">
+                                                {{item.categoryName}}
+                                            </router-link>
+                                        </div>
+
+                                        <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
+                                            <el-link>
+                                                <h3>{{item.title}}</h3>
+                                            </el-link>
                                         </router-link>
                                     </div>
 
-                                    <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                                        <el-link>
-                                            <h3>{{item.title}}</h3>
-                                        </el-link>
-                                    </router-link>
-
-                                    <!-- <div>{{item.content}}</div> -->
-                                    <div style="height:24px;">
+                                    <div
+                                        style="height:24px;display: flex;justify-content:space-between;align-items: center;">
                                         <div class="describe-userInfo">
                                             <el-link :underline="false" @click="toUser(item.user.id)">
-                                                <el-image style="width:24px;" :src="item.user.pic" fit="contain">
-                                                </el-image>
-                                                <span>{{item.user.name}}</span>
+                                                <div
+                                                    style="display: flex;justify-content:space-between;align-items: center;">
+                                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic"
+                                                        fit="cover">
+                                                    </el-image>
+                                                    <span>{{item.user.name}}</span>
+                                                </div>
                                             </el-link>
                                         </div>
                                         <div class="describe-content">
@@ -85,7 +92,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <el-button @click="loadnewArticles">点击加载</el-button>
+                        <el-button style="margin-left:16px;" @click="loadnewArticles">点击加载</el-button>
                     </div>
 
 
@@ -101,12 +108,14 @@
                                 <li v-for="(item,index) in hotArticles.list" :key="index">
                                     <div class="img">
                                         <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                                            <el-image style="width:84px;" :src="item.pic" fit="contain"></el-image>
+                                            <el-image style="width:84px; height:48px;" :src="item.pic" fit="cover">
+                                            </el-image>
                                         </router-link>
                                     </div>
-                                    <div class="describe">
+                                    <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
+                                        class="describe">
                                         <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                                            <el-link>{{item.title}}</el-link>
+                                            <a>{{item.title}}</a>
                                         </router-link>
                                         <div>{{item.updateTime | fomatTime}}</div>
                                     </div>
@@ -129,19 +138,26 @@
                                 <li class="top" v-for="(item,index) in comments.list" :key="index">
                                     <div class="userInfo">
                                         <el-link :underline="false" @click="toUser(item.user.id)">
-                                            <el-image style="width:25px;" :src="item.user.pic" fit="contain"></el-image>
-                                            <span>{{item.user.name}}</span>
+                                            <div
+                                                style="display: flex;justify-content:space-between;align-items: center;">
+                                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic"
+                                                    fit="cover">
+                                                </el-image>
+                                                <span>{{item.user.name}}</span>
+                                            </div>
                                         </el-link>
                                         <div class="time">{{item.updateTime | fomatTime}}</div>
                                     </div>
 
                                     <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-                                        {{item.content}}</div>
-                                    <div>
+                                        {{item.content}}
+                                    </div>
+
+                                    <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         <span>[文章]来自：</span>
                                         <router-link
                                             :to="{name: 'Article',query:{article:JSON.stringify(item.article)}}">
-                                            <el-link>{{item.article.title}}</el-link>
+                                            <a>{{item.article.title}}</a>
                                         </router-link>
                                     </div>
                                 </li>
@@ -226,6 +242,8 @@
                             this.newArticles.list = list
                         }
                     })
+                } else {
+                    this.$message.warning('没有数据了')
                 }
 
             },
@@ -327,19 +345,11 @@
 
             .describe {
                 flex: 1;
-
-                div,
-                h3 {
-                    margin: 5px 0;
-                }
-
-                .describe-userInfo {
-                    float: left;
-                }
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
 
                 .describe-content {
-                    float: right;
-
                     li {
                         display: inline;
                     }
@@ -353,9 +363,9 @@
             .content {
                 li {
                     display: flex;
-
                     .img {
                         margin-right: 10px;
+                        flex: 0;
                     }
 
                     .describe {
@@ -374,6 +384,7 @@
 
             .content {
                 .top {
+                    margin-top: 15px;
                     .userInfo {
                         display: flex;
                         justify-content: space-between;

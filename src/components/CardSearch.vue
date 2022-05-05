@@ -203,8 +203,8 @@
                     value: '风',
                     label: '风'
                 }, {
-                    value: '火',
-                    label: '火'
+                    value: '炎',
+                    label: '炎'
                 }, {
                     value: '神',
                     label: '神'
@@ -510,9 +510,6 @@
                     }, {
                         value: '永续',
                         label: '永续'
-                    }, {
-                        value: '反击',
-                        label: '反击'
                     }, {
                         value: '通常',
                         label: '通常'

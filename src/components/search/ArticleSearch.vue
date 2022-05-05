@@ -31,18 +31,16 @@
                 <li v-for="(item,index) in articles.list" :key="index">
                     <div class="img">
                         <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                            <el-image style="width:190px;" :src="item.pic" fit="contain"></el-image>
+                            <el-image style="width:190px; height:120px;" :src="item.pic" fit="cover"></el-image>
                         </router-link>
                     </div>
-                    <div class="describe">
+                    <div class="describe" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
 
                         <router-link :to="{name: 'Article',query:{article:JSON.stringify(item)}}">
-                            <el-link>
-                                <h3>{{item.title}}</h3>
-                            </el-link>
+                            <a style="font-size:1.1em;">
+                                {{item.title}}
+                            </a>
                         </router-link>
-
-                        <!-- <div>{{item.content}}</div> -->
 
                         <div class="describe-content">
                             <div>
@@ -65,9 +63,11 @@
 
                         <div class="describe-userInfo">
                             <el-link :underline="false" @click="toUser(item.user.id)">
-                                <el-image style="width:24px;" :src="item.user.pic" fit="contain">
-                                </el-image>
-                                <span>{{item.user.name}}</span>
+                                <div style="display: flex;justify-content:space-between;align-items: center;">
+                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                    </el-image>
+                                    <span>{{item.user.name}}</span>
+                                </div>
                             </el-link>
                             <span>{{item.updateTime | fomatTime}}</span>
                         </div>
@@ -75,7 +75,10 @@
                     </div>
                 </li>
             </ul>
-            <el-button @click="getNextArticles(5)">点击加载</el-button>
+            <div style="width:1150px;margin:0 auto;">
+                <el-button @click="getNextArticles(5)">点击加载</el-button>
+            </div>
+
         </div>
         <el-empty description="暂无数据" v-else></el-empty>
     </div>
@@ -220,6 +223,8 @@
                             this.articles.list = list
                         }
                     })
+                } else {
+                    this.$message.warning('没有数据了')
                 }
 
             },
@@ -266,7 +271,7 @@
                 flex-wrap: wrap;
 
                 >li {
-                    margin: 0 20px;
+                    margin: 10px 20px;
                 }
             }
 

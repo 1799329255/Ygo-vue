@@ -6,9 +6,11 @@
                 <li class="top" v-for="(item,index) in comments.list" :key="index">
                     <div class="userInfo">
                         <div>
-                            <el-image style="width:24px;" :src="item.user.pic" fit="contain">
-                            </el-image>
-                            <span>{{item.user.name}}</span>
+                            <div style="display: flex;justify-content:space-between;align-items: center;">
+                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                </el-image>
+                                <span>{{item.user.name}}</span>
+                            </div>
                         </div>
 
                         <div class="time">{{item.updateTime | fomatTime}}</div>

@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </el-form-item>
-                    <el-button type="primary" @click="submitForm('form')">立即创建</el-button>
+                    <el-button type="primary" @click="submitForm('form')">立即{{article?'更新':'创建'}}</el-button>
                 </el-form>
 
 
@@ -93,7 +93,7 @@
             }
 
             return {
-                article: this.$route.query.article?JSON.parse(this.$route.query.article):null,
+                article: this.$route.query.article ? JSON.parse(this.$route.query.article) : null,
                 form: {
                     title: '',
                     imageUrl: '',
@@ -225,6 +225,10 @@
                                         this.postRequest('/articlelabel/updateArticlelabel', {
                                             articleId: this.article.id,
                                             labels: this.form.labels
+                                        }).then(res => {
+                                            if (res) {
+                                                this.$message.success('更新成功')
+                                            }
                                         })
                                     }
                                     if (this.form.imageFile) {
@@ -236,6 +240,7 @@
                                         this.postRequest('/article/updatePic', formData).then(res => {
                                             if (res) {
                                                 this.form.imageUrl = res.data.fileUrl
+                                                this.$message.success('封面上传成功')
                                             }
                                         })
                                     }
@@ -259,7 +264,11 @@
                                                     '/articlelabel/addArticlelabel', {
                                                         articleId: articleId,
                                                         labels: this.form.labels
-                                                    })
+                                                    }).then(res => {
+                                                    if (res) {
+                                                        this.$message.success('创建成功')
+                                                    }
+                                                })
                                             }
 
                                             let formData = new FormData()
@@ -272,6 +281,7 @@
                                                         if (res) {
                                                             this.form.imageUrl = res.data
                                                                 .fileUrl
+                                                            this.$message.success('封面上传成功')
                                                         }
                                                     })
                                         }

@@ -23,7 +23,7 @@ Vue.prototype.getRequest = getRequest
 Vue.prototype.postRequest = postRequest
 Vue.prototype.putRequest = putRequest
 Vue.prototype.deleteRequest = deleteRequest
-Vue.filter('fomatTime',fomatTime)
+Vue.filter('fomatTime', fomatTime)
 
 Vue.config.productionTip = false
 
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
         if (res) {
           // 获取用户信息，保存到vuex
           let user = res.data
-          store.commit('setUser', res.data)
+          store.commit('setUser', user)
 
           // 有user信息的情况，直接跳转
           next()
@@ -54,7 +54,8 @@ router.beforeEach((to, from, next) => {
     next()
   } else
     //未登录情况，这些地址放行 
-    if (to.path.matchAll('/','/main','/login','/register','/article*')) {
+    if (to.path == '/' || to.path == '/main' || to.path == '/login' || to.path == '/register' ||
+      to.path == '/search' || to.path == '/cardSearch' || to.path == '/cards' || to.path.match('/user/*') || to.path.match('/article*')) {
       next()
     } else {
       // 其他未登录情况，跳往主页
