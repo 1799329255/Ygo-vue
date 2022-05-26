@@ -73,8 +73,8 @@
                 timer: null,
 
                 registerForm: {
-                    username: "admin",
-                    password: "123",
+                    username: "",
+                    password: "",
                     checkPass: "",
                     email: "1799329255@qq.com",
                     code: "",
@@ -86,8 +86,8 @@
                             trigger: "blur"
                         },
                         {
-                            min: 3,
-                            max: 5,
+                            min: 2,
+                            max: 20,
                             message: "长度在 2 到 20 个字符",
                             trigger: "blur"
                         },
@@ -121,13 +121,14 @@
                             this.loading = true;
                             if (res.data) {
                                 this.loading = false;
-                                this.$router.replace("/login");
+                                this.$router.replace("/login")
+                                this.$message.success('注册成功')
                             }
                             this.loading = false;
                         });
                     } else {
                         this.loading = false;
-                        this.$message.error("error submit!!");
+                        this.$message.error("格式不正确，请重新输入")
                         return false;
                     }
                 });

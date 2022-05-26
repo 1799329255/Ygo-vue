@@ -103,7 +103,7 @@
         methods: {
             ...mapActions(['updateUser', 'updateOtherUser']),
             init() {
-                if (this.otherUser) {
+                if (this.otherUser && this.user) {
                     this.isFollow()
                 }
             },
@@ -152,8 +152,8 @@
             },
             isFollow() {
                 this.getRequest("/user/isFollow", {
-                    fanId: this.user.id,
-                    followId: this.otherUser.id
+                    fanId: this.otherUser.id,
+                    followId: this.user.id
                 }).then((res) => {
                     if (res) {
                         this.isFollowed = res.data

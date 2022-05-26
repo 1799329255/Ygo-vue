@@ -3,7 +3,7 @@
 
     <div class="banner">
       <el-row class="search" :gutter="20">
-        <el-col :span="elspans[0]"><img src="http://127.0.0.1:9000/system/logo/logo.png" style="height: 50px;" />
+        <el-col :span="elspans[0]"><img src="/system/logo/logo.png" style="height: 50px;" />
         </el-col>
         <el-col :span="elspans[1]">
           <div class="grid-content bg-purple"></div>
@@ -21,14 +21,14 @@
         <template v-if="isLogin">
           <el-col :span="elspans[3]">
             <el-popover placement="bottom-end" width="300" trigger="hover">
-              <el-avatar slot="reference" size="large" :src="user.pic">
+              <el-avatar slot="reference" size="large" :src="user.pic?user.pic:'/system/avatar/avatar.jpg'">
               </el-avatar>
               <div class="user-info-box">
                 <div class="user-info-box-top">
                   <el-row :gutter="20">
                     <el-col :span="6">
                       <a href="javascript:;" @click="handleCommand">
-                        <img :src="user.pic" style="width: 48px;" />
+                        <img :src="user.pic?user.pic:'/system/avatar/avatar.jpg'" style="width: 48px;" />
                       </a>
                     </el-col>
                     <el-col :span="7">
@@ -42,7 +42,7 @@
                     <el-col :span="4">
                       <a href="javascript:;" @click="loginOut">
                         <el-tooltip class="item" effect="dark" content="注销" placement="top-start">
-                          <el-image style="width:25px;" src="http://127.0.0.1:9000/system/logout/logout.png"
+                          <el-image style="width:25px;" src="/system/logout/logout.png"
                             fit="cover">
                           </el-image>
                         </el-tooltip>

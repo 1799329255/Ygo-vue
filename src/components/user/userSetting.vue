@@ -351,6 +351,7 @@
                                 this.updateUser().then(res => {
                                     if (res) {
                                         this.handleShows(index, true)
+                                        this.$message.success('成功')
                                     }
                                 })
                             }

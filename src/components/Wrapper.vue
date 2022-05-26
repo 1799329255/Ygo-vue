@@ -66,7 +66,7 @@
                                             <el-link :underline="false" @click="toUser(item.user.id)">
                                                 <div
                                                     style="display: flex;justify-content:space-between;align-items: center;">
-                                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic"
+                                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic?item.user.pic:'/system/avatar/avatar.jpg'"
                                                         fit="cover">
                                                     </el-image>
                                                     <span>{{item.user.name}}</span>
@@ -78,12 +78,12 @@
                                                 <li>{{item.updateTime | fomatTime}}</li>
                                                 <li>
                                                     <el-image class="myImg"
-                                                        src="http://127.0.0.1:9000/system/like/like.png">
+                                                        src="/system/like/like.png">
                                                     </el-image>{{item.likeNum}}
                                                 </li>
                                                 <li>
                                                     <el-image class="myImg"
-                                                        src="http://127.0.0.1:9000/system/view/view.png">
+                                                        src="/system/view/view.png">
                                                     </el-image>{{item.viewNum}}
                                                 </li>
                                             </ul>
@@ -140,7 +140,7 @@
                                         <el-link :underline="false" @click="toUser(item.user.id)">
                                             <div
                                                 style="display: flex;justify-content:space-between;align-items: center;">
-                                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic"
+                                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic?item.user.pic:'/system/avatar/avatar.jpg'"
                                                     fit="cover">
                                                 </el-image>
                                                 <span>{{item.user.name}}</span>

@@ -17,7 +17,7 @@
                         <div class="main">
                             <el-link :underline="false" @click="toUser(user.id)">
                                 <div style="display: flex;justify-content:space-between;align-items: center;">
-                                    <el-image style="width:50px; margin-right:5px;" :src="user.pic" fit="cover">
+                                    <el-image style="width:50px; margin-right:5px;" :src="user.pic?user.pic:'/system/avatar/avatar.jpg'" fit="cover">
                                     </el-image>
                                     <span>{{user.name}}</span>
                                 </div>

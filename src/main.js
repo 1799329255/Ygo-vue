@@ -55,7 +55,7 @@ router.beforeEach((to, from, next) => {
   } else
     //未登录情况，这些地址放行 
     if (to.path == '/' || to.path == '/main' || to.path == '/login' || to.path == '/register' ||
-      to.path == '/search' || to.path == '/cardSearch' || to.path == '/cards' || to.path.match('/user/*') || to.path.match('/article*')) {
+      to.path == '/search' || to.path == '/cardSearch' || to.path == '/card' || to.path == '/cards' || to.path.match('/user/*') || to.path.match('/article*')) {
       next()
     } else {
       // 其他未登录情况，跳往主页

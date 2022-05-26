@@ -33,8 +33,8 @@
         captchaUrl: "/captcha?time=" + new Date(),
         //用户信息
         loginForm: {
-          username: "admin",
-          password: "123",
+          username: "",
+          password: "",
           code: "",
         },
         //是否下次自动登录
@@ -90,10 +90,10 @@
                 if(this.isChecked){
                   setCookie("tokenStr",tokenStr)
                 }
-                
                 window.sessionStorage.setItem("tokenStr", tokenStr);
                 this.loading = false
                 this.$router.replace("/");
+                this.$message.success('登录成功')
               }
               this.loading = false;
             });

@@ -11,7 +11,7 @@
       <el-col :span="6">
         <div class="footer-title">合作伙伴</div>
         <div class="footer-content">
-          <img src="http://127.0.0.1:9000/system/wangyi/wangyi.png" style="width: 80%;" alt="" />
+          <img src="/system/wangyi/wangyi.png" style="width: 80%;" alt="" />
         </div>
       </el-col>
       <el-col :span="6">
@@ -20,7 +20,7 @@
           <ul class="links-widget">
             <li>
               <div class="links-icon">
-                <img src="http://127.0.0.1:9000/system/youhui/youhui.png"
+                <img src="/system/youhui/youhui.png"
                   style="width: 15%;" />
               </div>
               <div>

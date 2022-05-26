@@ -7,7 +7,7 @@
 
           <div class="left-top">
             <div class="img">
-              <el-image style="width:100px;" :src="middleUser.pic" fit="contain"></el-image>
+              <el-image style="width:100px;" :src="middleUser.pic?middleUser.pic:'/system/avatar/avatar.jpg'" fit="contain"></el-image>
             </div>
             <div class="userName">{{middleUser.name}}</div>
           </div>
@@ -18,19 +18,19 @@
               <span slot="title">概览</span>
             </el-menu-item>
             <el-menu-item index="/user/article">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-tickets"></i>
               <span slot="title">文章</span>
             </el-menu-item>
             <el-menu-item index="/user/comment">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-document"></i>
               <span slot="title">评论</span>
             </el-menu-item>
             <el-menu-item index="/user/follow">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-user"></i>
               <span slot="title">关注</span>
             </el-menu-item>
             <el-menu-item index="/user/fan">
-              <i class="el-icon-document"></i>
+              <i class="el-icon-user-solid"></i>
               <span slot="title">粉丝</span>
             </el-menu-item>
             <el-menu-item index="/user/setting" v-if="!otherUser">

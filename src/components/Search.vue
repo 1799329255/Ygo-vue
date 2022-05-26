@@ -5,7 +5,7 @@
                 <article-search :search="tabName=='1'?search:null"></article-search>
             </el-tab-pane>
             <el-tab-pane label="用户" name="2">
-                <user-search :search="tabName=='1'?search:null"></user-search>
+                <user-search :search="tabName=='2'?search:null"></user-search>
             </el-tab-pane>
         </el-tabs>
     </div>

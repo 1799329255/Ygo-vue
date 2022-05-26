@@ -5,7 +5,7 @@
                 <el-link :underline="false" @click="toUser(item.id)">
                     <div class="box">
                         <div class="img">
-                            <el-image style="width:100px;" :src="item.pic" fit="contain">
+                            <el-image style="width:100px;" :src="item.pic?item.pic:'/system/avatar/avatar.jpg'" fit="contain">
                             </el-image>
                         </div>
                         <div class="describe">
@@ -29,6 +29,7 @@
             @current-change="handleCurrentChange" @prev-click="handlePrevClick" @next-click="handleNextClick">
         </el-pagination>
     </div>
+    <el-empty description="暂无数据" v-else></el-empty>
 </template>
 
 <script>
@@ -59,7 +60,7 @@
                     id: this.middleUser.id
                 }).then((res) => {
 
-                    if (res) {
+                    if (res.data) {
                         this.follows = res.data
                         this.loadNum++
                         this.follows.list.forEach(follow => {

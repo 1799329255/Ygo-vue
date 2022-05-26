@@ -7,7 +7,7 @@
                     <div class="userInfo">
                         <div>
                             <div style="display: flex;justify-content:space-between;align-items: center;">
-                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic?item.user.pic:'/system/avatar/avatar.jpg'" fit="cover">
                                 </el-image>
                                 <span>{{item.user.name}}</span>
                             </div>
@@ -32,6 +32,7 @@
             </el-pagination>
         </div>
     </div>
+    <el-empty description="暂无数据" v-else></el-empty>
 </template>
 
 <script>
@@ -63,7 +64,9 @@
 
                     if (res) {
                         this.comments = res.data
-                        this.loadNum++
+                        if(res.data.list.length>0){
+                            this.loadNum++
+                        }
 
                     }
 

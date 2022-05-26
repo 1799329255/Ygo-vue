@@ -30,23 +30,23 @@
                                 <div class="main" v-if="item.typeF==='怪兽'">
                                     <ul>
                                         <li>
-                                            <el-link type="primary" style="font-size:1em;"
+                                            <el-link type="primary" style="font-size:1em;position: relative;bottom:1.5px;"
                                                 @click="toCards({level:item.level})">
                                                 {{item.level}}</el-link>星/阶
                                         </li>
-                                        <li>AKT:<el-link type="primary" style="font-size:1em;"
+                                        <li>AKT:<el-link type="primary" style="font-size:1em;position: relative;bottom:1.5px;"
                                                 @click="toCards({atk:item.atk})">
                                                 {{item.atk}}</el-link>
                                         </li>
-                                        <li>DEF:<el-link type="primary" style="font-size:1em;"
+                                        <li>DEF:<el-link type="primary" style="font-size:1em;position: relative;bottom:1.5px;"
                                                 @click="toCards({def:item.def})">
                                                 {{item.def}}</el-link>
                                         </li>
-                                        <li>种族:<el-link type="primary" style="font-size:1em;"
+                                        <li>种族:<el-link type="primary" style="font-size:1em;position: relative;bottom:1.5px;"
                                                 @click="toCards({race:item.race})">
                                                 {{item.race}}</el-link>
                                         </li>
-                                        <li>属性:<el-link type="primary" style="font-size:1em;"
+                                        <li>属性:<el-link type="primary" style="font-size:1em;position: relative;bottom:1.5px;"
                                                 @click="toCards({attribute:item.attribute})">
                                                 {{item.attribute}}</el-link>
                                         </li>
@@ -65,6 +65,9 @@
                         :total="cards.total" @current-change="handleCurrentChange" @prev-click="handlePrevClick"
                         @next-click="handleNextClick">
                     </el-pagination>
+                </div>
+                <div v-else>
+                    <el-empty description="暂无数据"></el-empty>
                 </div>
             </el-col>
             <el-col :span="6">
@@ -108,7 +111,7 @@
                 this.getRequest("/card/findCardInfoPage", this.card).then((res) => {
                     if (res) {
                         this.cards = res.data
-                        this.isload = true
+                        this.isload = this.cards.list.length>0
                     }
                 })
             },
@@ -118,25 +121,31 @@
             },
             handlePrevClick() {
                 if (this.users.hasPreviousPage) {
-                    this.getCards(this.users.prePage, 5)
+                    this.getCards(this.cards.prePage, 5)
                 }
 
             },
             handleNextClick() {
                 if (this.users.hasNextPage) {
-                    this.getCards(this.users.nextPage, 5)
+                    this.getCards(this.cards.nextPage, 5)
                 }
 
             },
             toCards(value) {
-                this.$route.query.search = value
-                value.pageNum = 1
-                value.pageSize = 5
+                // this.$route.query.search = value
+                // value.pageNum = 1
+                // value.pageSize = 5
 
-                this.getRequest("/card/findCardInfoPage", value).then((res) => {
-                    if (res) {
-                        this.cards = res.data
-                        this.isload = true
+                // this.getRequest("/card/findCardInfoPage", value).then((res) => {
+                //     if (res) {
+                //         this.cards = res.data
+                //         this.isload = true
+                //     }
+                // })
+                this.$router.push({
+                    name: 'Cards',
+                    query: {
+                        search: JSON.stringify(value)
                     }
                 })
             }

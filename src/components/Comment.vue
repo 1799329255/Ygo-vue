@@ -13,7 +13,7 @@
                     <div class="userInfo">
                         <el-link :underline="false" @click="toUser(item.user.id)">
                             <div style="display: flex;justify-content:space-between;align-items: center;">
-                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                <el-image style="width:24px; margin-right:5px;" :src="item.user.pic?item.user.pic:'/system/avatar/avatar.jpg'" fit="cover">
                                 </el-image>
                                 <span>{{item.user.name}}</span>
                             </div>
@@ -67,7 +67,7 @@
             ...mapActions(['updateUser','updateOtherUser']),
             init() {
                 this.getRequest("/comment/findCommentInfoPage", {
-                    order: 'update_time',
+                    order: 'update_time DESC',
                     pageNum: 1,
                     pageSize: 4,
                     articleId: this.articleId
@@ -83,7 +83,7 @@
             },
             handleCurrentChange(pageNum) {
                 this.getRequest("/comment/findCommentInfoPage", {
-                    order: 'update_time',
+                    order: 'update_time DESC',
                     pageNum: pageNum,
                     pageSize: 4,
                     articleId: this.articleId
@@ -97,7 +97,7 @@
             handlePrevClick() {
                 if (this.comments.hasPreviousPage) {
                     this.getRequest("/comment/findCommentInfoPage", {
-                        order: 'update_time',
+                        order: 'update_time DESC',
                         pageNum: this.comments.prePage,
                         pageSize: 4,
                         articleId: this.articleId
@@ -113,7 +113,7 @@
             handleNextClick() {
                 if (this.comments.hasNextPage) {
                     this.getRequest("/comment/findCommentInfoPage", {
-                        order: 'update_time',
+                        order: 'update_time DESC',
                         pageNum: this.comments.nextPage,
                         pageSize: 4,
                         articleId: this.articleId
@@ -135,6 +135,7 @@
                     if (res) {
                         this.updateUser()
                         this.init()
+                        this.$message.success('回复成功')
                     }
                 })
             },

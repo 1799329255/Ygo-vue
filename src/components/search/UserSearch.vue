@@ -23,7 +23,7 @@
                     <el-link :underline="false" @click="toUser(item.id)">
                         <div class="box">
                             <div class="img">
-                                <el-image style="width:100px;" :src="item.pic" fit="contain">
+                                <el-image style="width:100px;height:100px;" :src="item.pic?item.pic:'/system/avatar/avatar.jpg'" fit="cover">
                                 </el-image>
                             </div>
                             <div>{{item.name}}</div>

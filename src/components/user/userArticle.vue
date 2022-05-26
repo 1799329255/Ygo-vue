@@ -1,5 +1,6 @@
 <template>
     <div v-if="loadNum>=1" class="userArticle">
+        <h3 class="title">最新文章</h3>
         <ul>
             <li v-for="(item,index) in articles.list" :key="index">
                 <div class="img">
@@ -35,7 +36,7 @@
                         <div class="describe-userInfo">
                             <div>
                                 <div style="display: flex;justify-content:space-between;align-items: center;">
-                                    <el-image style="width:24px; margin-right:5px;" :src="item.user.pic" fit="cover">
+                                    <el-image style="width:24px; margin-right:5px;" :src="user.pic?user.pic:'/system/avatar/avatar.jpg'" fit="cover">
                                     </el-image>
                                     <span>{{item.user.name}}</span>
                                 </div>
@@ -45,11 +46,11 @@
                             <ul>
                                 <li>{{item.updateTime | fomatTime}}</li>
                                 <li>
-                                    <el-image class="myImg" src="http://127.0.0.1:9000/system/like/like.png">
+                                    <el-image class="myImg" src="/system/like/like.png">
                                     </el-image>{{item.likeNum}}
                                 </li>
                                 <li>
-                                    <el-image class="myImg" src="http://127.0.0.1:9000/system/view/view.png">
+                                    <el-image class="myImg" src="/system/view/view.png">
                                     </el-image>{{item.viewNum}}
                                 </li>
                             </ul>
@@ -63,6 +64,7 @@
             @current-change="handleCurrentChange" @prev-click="handlePrevClick" @next-click="handleNextClick">
         </el-pagination>
     </div>
+    <el-empty description="暂无数据" v-else></el-empty>
 </template>
 
 <script>
@@ -94,8 +96,10 @@
 
                     if (res) {
                         this.articles = res.data
-                        this.loadNum++
-
+                        if(res.data.list.length>0){
+                            this.loadNum++
+                        }
+                        
                     }
 
                 })
